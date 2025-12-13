@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LangChain Research Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans'; }
+    body { margin: 0; background: #0b1020; color: #e8ecff; }
+    .wrap { max-width: 860px; margin: 40px auto; padding: 0 16px; }
+    h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+    p.muted { color: #b7c0ff; margin-top: 0; }
+    form.card { background: #131a33; padding: 16px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+    .row { display: flex; gap: 12px; margin-bottom: 12px; }
+    select, textarea, button, input[type="password"] {
+      width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #2a356b; background: #0f1630; color: #e8ecff;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    button { cursor: pointer; font-weight: 600; }
+    button:hover { background: #18214a; }
+    .result {
+      margin-top: 16px; background: #0f1630; border: 1px solid #2a356b; border-radius: 12px; padding: 12px; white-space: pre-wrap;
+    }
+    .alert { background: #251a00; border: 1px solid #ffcc66; color: #ffd166; padding: 10px; border-radius: 8px; margin: 12px 0; }
+    .footer { color: #8f99e6; font-size: 0.9rem; margin-top: 24px; }
+    code { background: #0f1630; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>LangChain Research Assistant</h1>
+      <p class="muted">Use Simple QA, the Support Agent with auto-escalation, or Summarize to get 3–5 bullets + a TL;DR.
+      </p>
+
+    <!-- API Key gate: only shown when .env has no AZURE_OPENAI_API_KEY -->
+    {% if need_key %}
+      <div class="alert">
+        Paste your API KEY from the nav bar above — we’ll save it and continue.
+      </div>
+      <form class="card" action="/save_key" method="POST">
+        <div class="row">
+          <input
+            type="password"
+            name="AZURE_OPENAI_API_KEY"
+            placeholder="API KEY (e.g., c319353d-8a3e-4aa1-af39-e5537b881324)"
+            aria-label="Azure OpenAI API Key"
+            required
+          />
+        </div>
+        <div class="row">
+          <button type="submit">Save Key</button>
+        </div>
+      </form>
+    {% endif %}
+
+    <!-- Main interaction form (hidden until key is saved) -->
+    {% if not need_key %}
+      <form class="card" action="/ask" method="POST">
+        <div class="row">
+          <select name="mode" aria-label="Mode">
+            <option value="qa"    {{ 'selected' if mode == 'qa' else '' }}>Simple QA</option>
+            <option value="agent" {{ 'selected' if mode == 'agent' else '' }}>Agent: Support → Escalation</option>
+            <option value="sum"   {{ 'selected' if mode == 'sum' else '' }}>Summarize (3–5 bullets + TL;DR)</option>
+          </select>
+        </div>
+        <div class="row">
+          <textarea name="text" placeholder="Type your question or paste content to summarize...">{{ text }}</textarea>
+        </div>
+        <div class="row">
+          <button type="submit">Run</button>
+        </div>
+      </form>
+    {% endif %}
+
+    <div class="result">
+      <strong>Result:</strong><br>
+      {{ result }}
+    </div>
+
+    <div class="footer">
+      JSON API: <code>POST /api/ask</code> with body <code>{"mode":"qa|agent|sum","input":"..."}</code>
+    </div>
+  </div>
+</body>
+</html>

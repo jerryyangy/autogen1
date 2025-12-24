@@ -30,6 +30,7 @@ Dialogue: A structured conversation between agents that yields one user-facing r
 
 ### Repo Layout (teaching-first split)
 
+```
 workspace/
 └── app/
     ├── base.py               # provided; env wiring, Azure/AutoGen config, Simple QA adapter, Agent adapter
@@ -40,3 +41,8 @@ workspace/
         └── index.html        # provided UI; no changes needed
 flask_app.py                  # provided; handles key, routes, and modes
 .env                          # created automatically when you paste your API key in the UI
+```
+```
+
+
+

@@ -42,19 +42,3 @@ workspace/
 flask_app.py                  # provided; handles key, routes, and modes
 .env                          # created automatically when you paste your API key in the UI
 ```
-
-
-
-## Useful links for Microsoft Copilot Studio
-
-| Description | Link |
-|--------------|------|
-| Home page | [aka.ms/CopilotStudio](https://aka.ms/CopilotStudio) |
-| Official blog | [aka.ms/CopilotStudioBlog](https://aka.ms/CopilotStudioBlog) |
-| Community forum | [aka.ms/CopilotStudioCommunity](https://aka.ms/CopilotStudioCommunity) |
-| Product documentation | [aka.ms/CopilotStudioDocs](https://aka.ms/CopilotStudioDocs) |
-| Guidance documentation | [aka.ms/CopilotStudioGuidance](https://aka.ms/CopilotStudioGuidance) |
-| Try Copilot Studio | [aka.ms/TryCopilotStudio](https://aka.ms/TryCopilotStudio) |
-```
-
-Would you like me to show you how to align the columns (e.g., left, center, or right) for a cleaner README layout?

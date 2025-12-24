@@ -33,10 +33,10 @@ Dialogue: A structured conversation between agents that yields one user-facing r
 workspace/
 └── app/
     ├── base.py               # provided; env wiring, Azure/AutoGen config, Simple QA adapter, Agent adapter
-    ├── agents.py     # Step 1: define Support & Escalation agents + ESCALATE_TOKEN
-    ├── router.py     # Step 2: orchestration (Support → optional Escalation, returns final string)
+    ├── agents.py             # Step 1: define Support & Escalation agents + ESCALATE_TOKEN
+    ├── router.py             # Step 2: orchestration (Support → optional Escalation, returns final string)
     ├── tools.py              # Step 3: implement "smart_summarizer" (3–5 bullets + TL;DR)
     └── templates/
         └── index.html        # provided UI; no changes needed
 flask_app.py                  # provided; handles key, routes, and modes
-.env                          # created a
+.env                          # created automatically when you paste your API key in the UI

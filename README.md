@@ -42,7 +42,3 @@ workspace/
 flask_app.py                  # provided; handles key, routes, and modes
 .env                          # created automatically when you paste your API key in the UI
 ```
-```
-
-
-
